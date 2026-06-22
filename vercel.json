@@ -2,11 +2,12 @@
   "experimentalServices": {
     "frontend": {
       "root": "frontend",
-      "framework": "vite"
+      "framework": "vite",
+      "mount": "/"
     },
     "backend": {
       "root": "backend",
-      "routePrefix": "/_backend"
+      "routePrefix": "/api"
     }
   }
 }
