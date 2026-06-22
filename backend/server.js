@@ -20,9 +20,18 @@ const __dirname = path.resolve();
 
 app.use(
 	cors({
-		origin: process.env.NODE_ENV === "production" 
-			? process.env.CLIENT_URL || "*"
-			: "http://localhost:5173",
+		origin: (origin, callback) => {
+			if (!origin) return callback(null, true);
+			const allowedOrigins = [
+				"http://localhost:5173",
+				"http://127.0.0.1:5173",
+				process.env.CLIENT_URL,
+			];
+			if (allowedOrigins.includes(origin)) {
+				return callback(null, true);
+			}
+			return callback(new Error("Not allowed by CORS"), false);
+		},
 		credentials: true,
 	})
 );
@@ -35,6 +44,20 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
+
+app.get("/api/debug", (req, res) => {
+	res.json({
+		origin: req.headers.origin || null,
+		allowedOrigins: [
+			"http://localhost:5173",
+			"http://127.0.0.1:5173",
+			process.env.CLIENT_URL,
+		],
+		CLIENT_URL: process.env.CLIENT_URL || null,
+		NODE_ENV: process.env.NODE_ENV || null,
+		PORT: process.env.PORT || null,
+	});
+});
 
 // if (process.env.NODE_ENV === "production") {
 // 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
