@@ -1,0 +1,19 @@
+{
+  "buildCommand": "npm install --prefix frontend && npm run build --prefix frontend",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install && npm install --prefix frontend",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "backend/**/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/backend/:path*"
+    }
+  ]
+}
