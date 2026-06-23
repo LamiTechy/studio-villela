@@ -3,16 +3,16 @@ import { supabase } from "../lib/supabase.js";
 const setCookies = (res, session) => {
 	res.cookie("accessToken", session.access_token, {
 		httpOnly: true,
-		secure: process.env.NODE_ENV === "production",
-		sameSite: "lax",
+		secure: true,
+		sameSite: "none",
 		path: "/",
 		maxAge: 15 * 60 * 1000,
 	});
 
 	res.cookie("refreshToken", session.refresh_token, {
 		httpOnly: true,
-		secure: process.env.NODE_ENV === "production",
-		sameSite: "lax",
+		secure: true,
+		sameSite: "none",
 		path: "/",
 		maxAge: 7 * 24 * 60 * 60 * 1000,
 	});
