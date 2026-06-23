@@ -19,15 +19,19 @@ import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 function App() {
 	const { user, checkAuth, checkingAuth } = useUserStore();
 	const { getCartItems } = useCartStore();
+	
 	useEffect(() => {
 		checkAuth();
-	}, [checkAuth]);
+		// Only run once on component mount
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		if (!user) return;
 
 		getCartItems();
-	}, [getCartItems, user]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user]);
 
 	if (checkingAuth) return <LoadingSpinner />;
 
