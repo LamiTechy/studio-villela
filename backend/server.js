@@ -21,16 +21,22 @@ const __dirname = path.resolve();
 app.use(
 	cors({
 		origin: (origin, callback) => {
+			// allow server-to-server or same-origin requests with no origin
 			if (!origin) return callback(null, true);
+
 			const allowedOrigins = [
 				"http://localhost:5173",
 				"http://127.0.0.1:5173",
-				"https://studio-villela.vercel.app",
 				process.env.CLIENT_URL,
-			];
-			if (allowedOrigins.includes(origin)) {
+			].filter(Boolean);
+
+			// allow exact matches or any Vercel preview/prod domain
+			const isVercel = typeof origin === "string" && origin.endsWith(".vercel.app");
+
+			if (allowedOrigins.includes(origin) || isVercel) {
 				return callback(null, true);
 			}
+
 			return callback(new Error("Not allowed by CORS"), false);
 		},
 		credentials: true,
