@@ -2,10 +2,19 @@ import { supabase } from "../lib/supabase.js";
 
 export const protectRoute = async (req, res, next) => {
 	try {
-		const accessToken = req.cookies.accessToken;
+		// Try to get token from cookies first, then from Authorization header
+		let accessToken = req.cookies.accessToken;
+		
+		if (!accessToken) {
+			// Try Authorization header (Bearer token)
+			const authHeader = req.headers.authorization;
+			if (authHeader && authHeader.startsWith("Bearer ")) {
+				accessToken = authHeader.substring(7); // Remove "Bearer " prefix
+			}
+		}
 
 		if (!accessToken) {
-			console.log("No access token found in cookies:", { cookies: Object.keys(req.cookies) });
+			console.log("No access token found in cookies or headers");
 			return res.status(401).json({ message: "Unauthorized - No access token provided" });
 		}
 

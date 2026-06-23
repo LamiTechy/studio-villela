@@ -17,6 +17,10 @@ export const useUserStore = create((set, get) => ({
 
 		try {
 			const res = await axios.post("/auth/signup", { name, email, password });
+			// Store token in localStorage as fallback for cookies
+			if (res.data.accessToken) {
+				localStorage.setItem("accessToken", res.data.accessToken);
+			}
 			set({ user: res.data, loading: false });
 		} catch (error) {
 			set({ loading: false });
@@ -29,6 +33,10 @@ export const useUserStore = create((set, get) => ({
 		try {
 			const res = await axios.post("/auth/login", { email, password });
 
+			// Store token in localStorage as fallback for cookies
+			if (res.data.accessToken) {
+				localStorage.setItem("accessToken", res.data.accessToken);
+			}
 			set({ user: res.data, loading: false });
 		} catch (error) {
 			set({ loading: false });
@@ -39,8 +47,10 @@ export const useUserStore = create((set, get) => ({
 	logout: async () => {
 		try {
 			await axios.post("/auth/logout");
+			localStorage.removeItem("accessToken");
 			set({ user: null });
 		} catch (error) {
+			localStorage.removeItem("accessToken");
 			toast.error(error.response?.data?.message || "An error occurred during logout");
 		}
 	},
@@ -49,9 +59,14 @@ export const useUserStore = create((set, get) => ({
 		set({ checkingAuth: true });
 		try {
 			const response = await axios.get("/auth/profile");
+			// Store token if returned
+			if (response.data.accessToken) {
+				localStorage.setItem("accessToken", response.data.accessToken);
+			}
 			set({ user: response.data, checkingAuth: false });
 		} catch (error) {
 			console.error("checkAuth error:", error.response?.data?.message || error.message);
+			localStorage.removeItem("accessToken");
 			set({ checkingAuth: false, user: null });
 		}
 	},

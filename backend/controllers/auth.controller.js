@@ -74,6 +74,7 @@ export const signup = async (req, res) => {
 			name,
 			email,
 			role: "customer",
+			accessToken: loginData.session.access_token,
 		});
 	} catch (error) {
 		console.log("Error in signup controller", error.message);
@@ -107,6 +108,7 @@ export const login = async (req, res) => {
 			name: profileData.name,
 			email: data.user.email,
 			role: profileData.role || "customer",
+			accessToken: data.session.access_token,
 		});
 	} catch (error) {
 		console.log("Error in login controller", error.message);
