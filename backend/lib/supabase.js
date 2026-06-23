@@ -6,9 +6,9 @@ const envPath = path.resolve(process.cwd(), "backend", ".env");
 const altEnvPath = path.resolve(process.cwd(), ".env");
 
 if (path.basename(process.cwd()) === "backend") {
-  dotenv.config({ path: envPath });
-} else {
   dotenv.config({ path: altEnvPath });
+} else {
+  dotenv.config({ path: envPath });
 }
 
 const supabaseUrl = process.env.SUPABASE_URL;
