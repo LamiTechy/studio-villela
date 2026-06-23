@@ -6,7 +6,7 @@ const setCookies = (res, session) => {
 		secure: true,
 		sameSite: "none",
 		path: "/",
-		maxAge: 15 * 60 * 1000,
+		maxAge: 60 * 60 * 1000, // 1 hour instead of 15 minutes
 	});
 
 	res.cookie("refreshToken", session.refresh_token, {

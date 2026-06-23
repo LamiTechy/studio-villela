@@ -5,12 +5,14 @@ export const protectRoute = async (req, res, next) => {
 		const accessToken = req.cookies.accessToken;
 
 		if (!accessToken) {
+			console.log("No access token found in cookies:", { cookies: Object.keys(req.cookies) });
 			return res.status(401).json({ message: "Unauthorized - No access token provided" });
 		}
 
 		const { data: userData, error: userError } = await supabase.auth.getUser(accessToken);
 
 		if (userError || !userData.user) {
+			console.log("Invalid or expired access token:", userError?.message);
 			return res.status(401).json({ message: "Unauthorized - Invalid or expired access token" });
 		}
 
@@ -21,6 +23,7 @@ export const protectRoute = async (req, res, next) => {
 			.single();
 
 		if (profileError) {
+			console.log("User profile not found:", profileError.message);
 			return res.status(401).json({ message: "Unauthorized - User profile not found" });
 		}
 

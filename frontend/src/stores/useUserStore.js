@@ -51,7 +51,7 @@ export const useUserStore = create((set, get) => ({
 			const response = await axios.get("/auth/profile");
 			set({ user: response.data, checkingAuth: false });
 		} catch (error) {
-			console.log(error.message);
+			console.error("checkAuth error:", error.response?.data?.message || error.message);
 			set({ checkingAuth: false, user: null });
 		}
 	},
@@ -82,31 +82,44 @@ axios.interceptors.response.use(
 	(response) => response,
 	async (error) => {
 		const originalRequest = error.config;
-		if (error.response?.status === 401 && !originalRequest._retry && !isRefreshing) {
+		
+		// Check if this is a 401 and we haven't already retried
+		if (error.response?.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;
-			isRefreshing = true;
 
-			try {
-				// If a refresh is already in progress, wait for it to complete
-				if (refreshPromise) {
+			// If we're already refreshing, wait for it
+			if (isRefreshing && refreshPromise) {
+				try {
 					await refreshPromise;
-					isRefreshing = false;
 					return axios(originalRequest);
+				} catch (err) {
+					return Promise.reject(err);
 				}
+			}
 
-				// Start a new refresh process
-				refreshPromise = useUserStore.getState().refreshToken();
-				await refreshPromise;
-				refreshPromise = null;
-				isRefreshing = false;
+			// Start a new refresh
+			if (!isRefreshing) {
+				isRefreshing = true;
+				refreshPromise = useUserStore
+					.getState()
+					.refreshToken()
+					.then(() => {
+						isRefreshing = false;
+						refreshPromise = null;
+						return axios(originalRequest);
+					})
+					.catch((err) => {
+						isRefreshing = false;
+						refreshPromise = null;
+						// Only logout if it's not a "no refresh token" error
+						// (that means user was never logged in)
+						if (err.response?.data?.message !== "No refresh token provided") {
+							useUserStore.getState().logout();
+						}
+						return Promise.reject(err);
+					});
 
-				return axios(originalRequest);
-			} catch (refreshError) {
-				// If refresh fails, redirect to login or handle as needed
-				isRefreshing = false;
-				refreshPromise = null;
-				useUserStore.getState().logout();
-				return Promise.reject(refreshError);
+				return refreshPromise;
 			}
 		}
 		return Promise.reject(error);
