@@ -78,9 +78,14 @@ export const useUserStore = create((set, get) => ({
 		set({ checkingAuth: true });
 		try {
 			const response = await axios.post("/auth/refresh-token");
+			// Store new token if returned
+			if (response.data.accessToken) {
+				localStorage.setItem("accessToken", response.data.accessToken);
+			}
 			set({ checkingAuth: false });
 			return response.data;
 		} catch (error) {
+			localStorage.removeItem("accessToken");
 			set({ user: null, checkingAuth: false });
 			throw error;
 		}

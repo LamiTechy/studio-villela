@@ -150,7 +150,10 @@ export const refreshToken = async (req, res) => {
 		}
 
 		setCookies(res, refreshed);
-		res.json({ message: "Token refreshed successfully" });
+		res.json({ 
+			message: "Token refreshed successfully",
+			accessToken: refreshed.access_token 
+		});
 	} catch (error) {
 		console.log("Error in refreshToken controller", error.message);
 		res.status(500).json({ message: "Server error", error: error.message });
