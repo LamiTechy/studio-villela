@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { useProductStore } from "../stores/useProductStore";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProductCard from "../components/ProductCard";
 import axios from "../lib/axios";
+
+const tabs = [
+	{ id: "all", label: "All" },
+	{ id: "dress", label: "Dress" },
+	{ id: "wigs", label: "Wigs" },
+];
 
 const SkeletonGrid = () => (
 	<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
@@ -22,6 +27,7 @@ const SkeletonGrid = () => (
 
 const CategoryPage = () => {
 	const { category } = useParams();
+	const navigate = useNavigate();
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -51,7 +57,22 @@ const CategoryPage = () => {
 				>
 					{category === "all" ? "All Products" : category.charAt(0).toUpperCase() + category.slice(1)}
 				</motion.h1>
-				
+
+				<div className='flex justify-center gap-2 mt-8 mb-10'>
+					{tabs.map((tab) => (
+						<button
+							key={tab.id}
+							onClick={() => navigate(`/category/${tab.id}`)}
+							className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+								category === tab.id
+									? "bg-emerald-600 text-white shadow-lg shadow-emerald-500/20"
+									: "bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-emerald-500/50 hover:text-white"
+							}`}
+						>
+							{tab.label}
+						</button>
+					))}
+				</div>
 
 				{isLoading ? (
 					<SkeletonGrid />
@@ -61,7 +82,7 @@ const CategoryPage = () => {
 					</h2>
 				) : (
 					<motion.div
-						className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center'
+						className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.2 }}

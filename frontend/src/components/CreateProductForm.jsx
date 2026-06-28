@@ -10,6 +10,7 @@ const CreateProductForm = () => {
 		name: "",
 		description: "",
 		price: "",
+		category: "dress",
 		image: "",
 		imageUrl: "",
 	});
@@ -31,12 +32,13 @@ const CreateProductForm = () => {
 				name: newProduct.name,
 				description: newProduct.description,
 				price: newProduct.price,
+				category: newProduct.category,
 				image: newProduct.imageUrl || newProduct.image,
 			};
 
 			await createProduct(payload);
 			toast.success("Product created!");
-			setNewProduct({ name: "", description: "", price: "", image: "", imageUrl: "" });
+			setNewProduct({ name: "", description: "", price: "", category: "dress", image: "", imageUrl: "" });
 			navigate("/");
 		} catch {
 			toast.error("Failed to create product");
@@ -119,7 +121,24 @@ const CreateProductForm = () => {
 					/>
 				</div>
 
-				<div className='space-y-1'>
+					<div>
+					<label htmlFor='category' className='block text-sm font-medium text-gray-300 mb-1.5'>
+						Collection
+					</label>
+					<select
+						id='category'
+						name='category'
+						value={newProduct.category}
+						onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+						className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-2.5 px-4 text-white focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+						required
+					>
+						<option value='dress'>Dress</option>
+						<option value='wigs'>Wigs</option>
+					</select>
+				</div>
+
+			<div className='space-y-1'>
 					<label className='block text-sm font-medium text-gray-300 mb-1.5'>
 						Product Image
 					</label>

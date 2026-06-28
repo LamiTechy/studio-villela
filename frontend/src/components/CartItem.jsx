@@ -41,7 +41,7 @@ const CartItem = ({ item }) => {
 				<div className='flex-1 min-w-0'>
 					<p className='text-base font-semibold text-white truncate'>{item.name}</p>
 					{item.selectedSize && (
-						<p className='text-sm text-emerald-400 mt-0.5'>Size: {item.selectedSize}</p>
+						<p className='text-sm text-emerald-400 mt-0.5'>{item.category === "wigs" ? "Length" : "Size"}: {item.selectedSize}</p>
 					)}
 					<p className='text-sm text-gray-400 mt-1 line-clamp-1'>{item.description}</p>
 

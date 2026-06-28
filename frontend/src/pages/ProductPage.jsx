@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useUserStore } from "../stores/useUserStore";
 
 const sizeOptions = ["XS", "S", "M", "L", "XL", "XXL"];
+const wigOptions = ["Short", "Medium", "Long", "Extra Long"];
 
 const ProductSkeleton = () => (
 	<div className='min-h-screen bg-gray-950 text-white py-12 animate-pulse'>
@@ -107,19 +108,21 @@ const ProductPage = () => {
 
 						<div className='rounded-2xl border border-gray-800 bg-gray-900/60 p-6 shadow-lg'>
 							<div className='mb-6'>
-								<h2 className='text-lg font-semibold text-white mb-3'>Choose Size</h2>
+								<h2 className='text-lg font-semibold text-white mb-3'>
+									{product.category === "wigs" ? "Choose Length" : "Choose Size"}
+								</h2>
 								<div className='flex flex-wrap gap-2'>
-									{sizeOptions.map((size) => (
+									{(product.category === "wigs" ? wigOptions : sizeOptions).map((option) => (
 										<button
-											key={size}
-											onClick={() => setSelectedSize(size)}
+											key={option}
+											onClick={() => setSelectedSize(option)}
 											className={`rounded-full border px-5 py-2 text-sm font-semibold transition-all duration-200 ${
-												selectedSize === size
+												selectedSize === option
 													? "border-emerald-500 bg-emerald-500/10 text-emerald-400 shadow-lg shadow-emerald-500/10"
 													: "border-gray-700 text-gray-400 hover:border-emerald-500/50 hover:text-white"
 											}`}
 										>
-											{size}
+											{option}
 										</button>
 									))}
 								</div>
@@ -131,7 +134,7 @@ const ProductPage = () => {
 									<p className='mt-2 text-3xl font-bold text-emerald-400'>${product.price.toFixed(2)}</p>
 								</div>
 								<div className='rounded-xl border border-gray-800 bg-gray-950/80 p-5'>
-									<p className='text-sm uppercase tracking-[0.1em] text-gray-500 font-medium'>Selected</p>
+									<p className='text-sm uppercase tracking-[0.1em] text-gray-500 font-medium'>{product.category === "wigs" ? "Length" : "Selected"}</p>
 									<p className='mt-2 text-3xl font-bold text-white'>{selectedSize}</p>
 								</div>
 							</div>

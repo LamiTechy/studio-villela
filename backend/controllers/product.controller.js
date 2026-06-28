@@ -89,7 +89,7 @@ export const getProductById = async (req, res) => {
 
 export const createProduct = async (req, res) => {
 	try {
-const { name, description, price, image } = req.body;
+const { name, description, price, category, image } = req.body;
 	const imageUrl = image ? await uploadImage(image) : "";
 
 	const result = await supabase
@@ -100,7 +100,7 @@ const { name, description, price, image } = req.body;
 				description,
 				price: Number(price),
 				image: imageUrl,
-				category: "",
+				category: category || "dress",
 					is_featured: true,
 				},
 			])
