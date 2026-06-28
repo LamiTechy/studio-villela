@@ -95,7 +95,7 @@ const ProductPage = () => {
 						<img
 							src={product.image}
 							alt={product.name}
-							className='w-full aspect-[4/3] object-cover'
+							className='w-full object-contain max-h-[600px]'
 						/>
 					</div>
 
