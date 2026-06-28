@@ -167,7 +167,13 @@ export const getRecommendedProducts = async (req, res) => {
 export const getProductsByCategory = async (req, res) => {
 	const { category } = req.params;
 	try {
-		const { data, error } = await supabase.from("products").select("*").eq("category", category);
+		let query = supabase.from("products").select("*");
+
+		if (category !== "all") {
+			query = query.eq("category", category);
+		}
+
+		const { data, error } = await query.order("created_at", { ascending: false });
 
 		if (error) {
 			throw error;
