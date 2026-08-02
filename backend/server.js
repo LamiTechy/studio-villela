@@ -32,8 +32,10 @@ app.use(
 
 			// allow exact matches or any Vercel preview/prod domain
 			const isVercel = typeof origin === "string" && origin.endsWith(".vercel.app");
+			// allow custom domain (all https origins if in production)
+			const isCustomDomain = typeof origin === "string" && origin.startsWith("https://");
 
-			if (allowedOrigins.includes(origin) || isVercel) {
+			if (allowedOrigins.includes(origin) || isVercel || (process.env.NODE_ENV === "production" && isCustomDomain)) {
 				return callback(null, true);
 			}
 
