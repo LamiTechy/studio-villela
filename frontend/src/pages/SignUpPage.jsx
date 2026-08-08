@@ -27,10 +27,10 @@ const SignUpPage = () => {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}
 			>
-				<h2 className='text-center text-4xl font-bold text-white font-display tracking-tight'>
+				<h2 className='text-center text-4xl font-bold text-gray-900 font-display tracking-tight'>
 					Create your account
 				</h2>
-				<p className='mt-2 text-center text-gray-400'>
+				<p className='mt-2 text-center text-gray-500'>
 					Join us and start shopping
 				</p>
 			</motion.div>
@@ -41,15 +41,15 @@ const SignUpPage = () => {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8, delay: 0.2 }}
 			>
-				<div className='bg-gray-800/60 backdrop-blur-sm border border-gray-700/50 py-8 px-6 shadow-xl shadow-emerald-500/5 sm:rounded-2xl sm:px-10'>
+				<div className='bg-white border border-gray-200 py-8 px-6 shadow-xl shadow-pink-500/5 sm:rounded-2xl sm:px-10'>
 					<form onSubmit={handleSubmit} className='space-y-5'>
 						<div>
-							<label htmlFor='name' className='block text-sm font-medium text-gray-300 mb-1.5'>
+							<label htmlFor='name' className='block text-sm font-medium text-gray-700 mb-1.5'>
 								Full name
 							</label>
 							<div className='relative rounded-xl shadow-sm'>
 								<div className='absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none'>
-									<User className='h-5 w-5 text-gray-500' aria-hidden='true' />
+									<User className='h-5 w-5 text-gray-400' aria-hidden='true' />
 								</div>
 								<input
 									id='name'
@@ -57,19 +57,19 @@ const SignUpPage = () => {
 									required
 									value={formData.name}
 									onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-									className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+									className='block w-full rounded-xl border border-gray-300 bg-white py-3 pl-11 pr-4 text-gray-900 placeholder-gray-400 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors'
 									placeholder='John Doe'
 								/>
 							</div>
 						</div>
 
 						<div>
-							<label htmlFor='email' className='block text-sm font-medium text-gray-300 mb-1.5'>
+							<label htmlFor='email' className='block text-sm font-medium text-gray-700 mb-1.5'>
 								Email address
 							</label>
 							<div className='relative rounded-xl shadow-sm'>
 								<div className='absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none'>
-									<Mail className='h-5 w-5 text-gray-500' aria-hidden='true' />
+									<Mail className='h-5 w-5 text-gray-400' aria-hidden='true' />
 								</div>
 								<input
 									id='email'
@@ -77,19 +77,19 @@ const SignUpPage = () => {
 									required
 									value={formData.email}
 									onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-									className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+									className='block w-full rounded-xl border border-gray-300 bg-white py-3 pl-11 pr-4 text-gray-900 placeholder-gray-400 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors'
 									placeholder='you@example.com'
 								/>
 							</div>
 						</div>
 
 						<div>
-							<label htmlFor='password' className='block text-sm font-medium text-gray-300 mb-1.5'>
+							<label htmlFor='password' className='block text-sm font-medium text-gray-700 mb-1.5'>
 								Password
 							</label>
 							<div className='relative rounded-xl shadow-sm'>
 								<div className='absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none'>
-									<Lock className='h-5 w-5 text-gray-500' aria-hidden='true' />
+									<Lock className='h-5 w-5 text-gray-400' aria-hidden='true' />
 								</div>
 								<input
 									id='password'
@@ -97,19 +97,19 @@ const SignUpPage = () => {
 									required
 									value={formData.password}
 									onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-									className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+									className='block w-full rounded-xl border border-gray-300 bg-white py-3 pl-11 pr-4 text-gray-900 placeholder-gray-400 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors'
 									placeholder='••••••••'
 								/>
 							</div>
 						</div>
 
 						<div>
-							<label htmlFor='confirmPassword' className='block text-sm font-medium text-gray-300 mb-1.5'>
+							<label htmlFor='confirmPassword' className='block text-sm font-medium text-gray-700 mb-1.5'>
 								Confirm Password
 							</label>
 							<div className='relative rounded-xl shadow-sm'>
 								<div className='absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none'>
-									<Lock className='h-5 w-5 text-gray-500' aria-hidden='true' />
+									<Lock className='h-5 w-5 text-gray-400' aria-hidden='true' />
 								</div>
 								<input
 									id='confirmPassword'
@@ -117,7 +117,7 @@ const SignUpPage = () => {
 									required
 									value={formData.confirmPassword}
 									onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-									className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+									className='block w-full rounded-xl border border-gray-300 bg-white py-3 pl-11 pr-4 text-gray-900 placeholder-gray-400 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors'
 									placeholder='••••••••'
 								/>
 							</div>
@@ -125,7 +125,7 @@ const SignUpPage = () => {
 
 						<button
 							type='submit'
-							className='w-full rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 hover:from-emerald-500 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2'
+							className='w-full rounded-xl bg-gradient-to-r from-pink-600 to-pink-500 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-500/20 hover:from-pink-500 hover:to-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-white transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2'
 							disabled={loading}
 						>
 							{loading ? (
@@ -142,9 +142,9 @@ const SignUpPage = () => {
 						</button>
 					</form>
 
-					<p className='mt-8 text-center text-sm text-gray-400'>
+					<p className='mt-8 text-center text-sm text-gray-500'>
 						Already have an account?{" "}
-						<Link to='/login' className='font-semibold text-emerald-400 hover:text-emerald-300 transition-colors'>
+						<Link to='/login' className='font-semibold text-pink-600 hover:text-pink-500 transition-colors'>
 							Sign in <ArrowRight className='inline h-4 w-4' />
 						</Link>
 					</p>

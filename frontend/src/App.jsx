@@ -1,5 +1,6 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
+import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
@@ -16,29 +17,25 @@ import { useCartStore } from "./stores/useCartStore";
 import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
 import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 
-const NotFoundPage = ({ title = "Page not found", message = "The page you're looking for doesn't exist or has been moved.", hideHomeLink = false }) => (
+const NotFoundPage = () => (
 	<div className="min-h-screen flex flex-col items-center justify-center px-4">
-		<h1 className="text-8xl font-black text-emerald-500 mb-4 font-display">404</h1>
-		<p className="text-2xl text-gray-300 mb-8 font-display">{title}</p>
-		<p className="text-gray-400 mb-8 text-center max-w-md">
-			{message}
+		<h1 className="text-8xl font-black text-pink-500 mb-4 font-display">404</h1>
+		<p className="text-2xl text-gray-700 mb-8 font-display">Page not found</p>
+		<p className="text-gray-500 mb-8 text-center max-w-md">
+			The page you're looking for doesn't exist or has been moved.
 		</p>
-		{!hideHomeLink && (
-			<a
-				href="/"
-				className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-white font-semibold hover:bg-emerald-500 transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25"
-			>
-				Back to Home
-			</a>
-		)}
+		<a
+			href="/"
+			className="inline-flex items-center gap-2 rounded-full bg-pink-600 px-6 py-3 text-white font-semibold hover:bg-pink-500 transition-all duration-200 hover:shadow-lg hover:shadow-pink-500/25"
+		>
+			Back to Home
+		</a>
 	</div>
 );
 
 function App() {
 	const { user, checkAuth, checkingAuth } = useUserStore();
 	const { getCartItems } = useCartStore();
-	const { pathname } = useLocation();
-	const isServerDown = pathname === "/";
 
 	useEffect(() => {
 		checkAuth();
@@ -54,26 +51,17 @@ function App() {
 	if (checkingAuth) return <LoadingSpinner />;
 
 	return (
-		<div className='min-h-screen bg-gray-950 text-white font-body relative overflow-hidden'>
+		<div className='min-h-screen bg-white text-gray-900 font-body relative overflow-hidden'>
 			<div className='absolute inset-0 overflow-hidden'>
 				<div className='absolute inset-0'>
-					<div className='absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.15)_0%,rgba(10,80,60,0.1)_45%,rgba(0,0,0,0)_100%)]' />
+					<div className='absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(236,72,153,0.08)_0%,rgba(244,114,182,0.05)_45%,rgba(255,255,255,0)_100%)]' />
 				</div>
 			</div>
 
 			<div className='relative z-50 pt-20'>
-				{!isServerDown && <Navbar />}
+				<Navbar />
 				<Routes>
-					<Route
-						path='/'
-						element={
-							<NotFoundPage
-								title='Server is not responding'
-								message='Sorry, the server is currently unavailable. Please try again later.'
-								hideHomeLink
-							/>
-						}
-					/>
+					<Route path='/' element={<HomePage />} />
 					<Route path='/product/:id' element={<ProductPage />} />
 					<Route path='/category/:category' element={<CategoryPage />} />
 					<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
@@ -96,11 +84,11 @@ function App() {
 				toastOptions={{
 					duration: 4000,
 					style: {
-						background: "#1f2937",
-						color: "#fff",
-						border: "1px solid rgba(16,185,129,0.2)",
+						background: "#ffffff",
+						color: "#1f2937",
+						border: "1px solid rgba(236,72,153,0.2)",
 					},
-					success: { iconTheme: { primary: "#10b981", secondary: "#fff" } },
+					success: { iconTheme: { primary: "#ec4899", secondary: "#fff" } },
 					error: { iconTheme: { primary: "#ef4444", secondary: "#fff" } },
 				}}
 			/>

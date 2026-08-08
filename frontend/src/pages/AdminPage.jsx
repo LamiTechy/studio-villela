@@ -30,21 +30,21 @@ const AdminPage = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
 				>
-					<span className='bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent'>
+					<span className='bg-gradient-to-r from-pink-600 to-rose-500 bg-clip-text text-transparent'>
 						Admin Dashboard
 					</span>
 				</motion.h1>
-				<p className='text-gray-400 text-center mb-10'>Manage your store</p>
+				<p className='text-gray-500 text-center mb-10'>Manage your store</p>
 
-				<div className='flex justify-center mb-8 border-b border-gray-800/50'>
+				<div className='flex justify-center mb-8 border-b border-gray-200'>
 					{tabs.map((tab) => (
 						<button
 							key={tab.id}
 							onClick={() => setActiveTab(tab.id)}
 							className={`flex items-center px-5 py-3 text-sm font-medium transition-all duration-200 border-b-2 -mb-px ${
 								activeTab === tab.id
-									? "border-emerald-500 text-emerald-400"
-									: "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
+									? "border-pink-500 text-pink-600"
+									: "border-transparent text-gray-400 hover:text-gray-600 hover:border-gray-300"
 							}`}
 						>
 							<tab.icon className='mr-2 h-4 w-4' />

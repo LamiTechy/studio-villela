@@ -10,25 +10,25 @@ const sizeOptions = ["XS", "S", "M", "L", "XL", "XXL"];
 const wigOptions = ["Short", "Medium", "Long", "Extra Long"];
 
 const ProductSkeleton = () => (
-	<div className='min-h-screen bg-gray-950 text-white py-12 animate-pulse'>
+	<div className='min-h-screen bg-white text-gray-900 py-12 animate-pulse'>
 		<div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
-			<div className='h-10 w-24 bg-gray-800 rounded-full mb-8' />
+			<div className='h-10 w-24 bg-gray-200 rounded-full mb-8' />
 			<div className='grid gap-8 lg:grid-cols-2 items-start'>
-				<div className='aspect-[4/3] rounded-3xl bg-gray-800' />
+				<div className='aspect-[4/3] rounded-3xl bg-gray-200' />
 				<div className='space-y-6'>
 					<div className='space-y-3'>
-						<div className='h-4 w-32 bg-gray-800 rounded' />
-						<div className='h-10 w-3/4 bg-gray-800 rounded' />
-						<div className='h-20 bg-gray-800 rounded' />
+						<div className='h-4 w-32 bg-gray-200 rounded' />
+						<div className='h-10 w-3/4 bg-gray-200 rounded' />
+						<div className='h-20 bg-gray-200 rounded' />
 					</div>
-					<div className='rounded-3xl border border-gray-800 bg-gray-900/80 p-6'>
-						<div className='h-6 w-24 bg-gray-800 rounded mb-4' />
+					<div className='rounded-3xl border border-gray-200 bg-gray-50 p-6'>
+						<div className='h-6 w-24 bg-gray-200 rounded mb-4' />
 						<div className='flex gap-3 mb-6'>
 							{sizeOptions.slice(0, 4).map((s) => (
-								<div key={s} className='h-10 w-14 bg-gray-800 rounded-full' />
+								<div key={s} className='h-10 w-14 bg-gray-200 rounded-full' />
 							))}
 						</div>
-						<div className='h-14 bg-gray-800 rounded-3xl' />
+						<div className='h-14 bg-gray-200 rounded-3xl' />
 					</div>
 				</div>
 			</div>
@@ -78,11 +78,11 @@ const ProductPage = () => {
 	};
 
 	return (
-		<div className='min-h-screen bg-gray-950 text-white py-12'>
+		<div className='min-h-screen bg-white text-gray-900 py-12'>
 			<div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
 				<div className='flex items-center justify-between gap-4 mb-8'>
 					<button
-						className='inline-flex items-center gap-2 rounded-full border border-gray-700 bg-gray-900/80 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-emerald-500 hover:text-emerald-400 hover:bg-gray-900'
+						className='inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all duration-200 hover:border-pink-300 hover:text-pink-600'
 						onClick={() => navigate(-1)}
 					>
 						<ArrowLeft className='h-4 w-4' />
@@ -91,7 +91,7 @@ const ProductPage = () => {
 				</div>
 
 				<div className='grid gap-8 lg:grid-cols-2 items-start'>
-					<div className='rounded-3xl overflow-hidden border border-emerald-500/20 bg-gray-800/30 shadow-xl shadow-emerald-500/5'>
+					<div className='rounded-3xl overflow-hidden border border-pink-100 bg-pink-50/40 shadow-xl shadow-pink-500/5'>
 						<img
 							src={product.image}
 							alt={product.name}
@@ -101,14 +101,14 @@ const ProductPage = () => {
 
 					<div className='space-y-6'>
 						<div>
-							<p className='text-sm uppercase tracking-[0.2em] text-emerald-400 mb-2 font-medium'>Product Details</p>
-							<h1 className='text-4xl font-bold text-white font-display tracking-tight'>{product.name}</h1>
-							<p className='mt-4 text-gray-400 leading-relaxed'>{product.description || "No description available."}</p>
+							<p className='text-sm uppercase tracking-[0.2em] text-pink-600 mb-2 font-medium'>Product Details</p>
+							<h1 className='text-4xl font-bold text-gray-900 font-display tracking-tight'>{product.name}</h1>
+							<p className='mt-4 text-gray-500 leading-relaxed'>{product.description || "No description available."}</p>
 						</div>
 
-						<div className='rounded-2xl border border-gray-800 bg-gray-900/60 p-6 shadow-lg'>
+						<div className='rounded-2xl border border-gray-200 bg-white p-6 shadow-sm'>
 							<div className='mb-6'>
-								<h2 className='text-lg font-semibold text-white mb-3'>
+								<h2 className='text-lg font-semibold text-gray-900 mb-3'>
 									{product.category === "wigs" ? "Choose Length" : "Choose Size"}
 								</h2>
 								<div className='flex flex-wrap gap-2'>
@@ -118,8 +118,8 @@ const ProductPage = () => {
 											onClick={() => setSelectedSize(option)}
 											className={`rounded-full border px-5 py-2 text-sm font-semibold transition-all duration-200 ${
 												selectedSize === option
-													? "border-emerald-500 bg-emerald-500/10 text-emerald-400 shadow-lg shadow-emerald-500/10"
-													: "border-gray-700 text-gray-400 hover:border-emerald-500/50 hover:text-white"
+													? "border-pink-500 bg-pink-50 text-pink-600 shadow-lg shadow-pink-500/10"
+													: "border-gray-200 text-gray-500 hover:border-pink-300 hover:text-pink-600"
 											}`}
 										>
 											{option}
@@ -129,20 +129,20 @@ const ProductPage = () => {
 							</div>
 
 							<div className='grid gap-4 sm:grid-cols-2 mb-6'>
-								<div className='rounded-xl border border-gray-800 bg-gray-950/80 p-5'>
-									<p className='text-sm uppercase tracking-[0.1em] text-gray-500 font-medium'>Price</p>
-									<p className='mt-2 text-3xl font-bold text-emerald-400'>${product.price.toFixed(2)}</p>
+								<div className='rounded-xl border border-gray-200 bg-gray-50 p-5'>
+									<p className='text-sm uppercase tracking-[0.1em] text-gray-400 font-medium'>Price</p>
+									<p className='mt-2 text-3xl font-bold text-pink-600'>${product.price.toFixed(2)}</p>
 								</div>
-								<div className='rounded-xl border border-gray-800 bg-gray-950/80 p-5'>
-									<p className='text-sm uppercase tracking-[0.1em] text-gray-500 font-medium'>{product.category === "wigs" ? "Length" : "Selected"}</p>
-									<p className='mt-2 text-3xl font-bold text-white'>{selectedSize}</p>
+								<div className='rounded-xl border border-gray-200 bg-gray-50 p-5'>
+									<p className='text-sm uppercase tracking-[0.1em] text-gray-400 font-medium'>{product.category === "wigs" ? "Length" : "Selected"}</p>
+									<p className='mt-2 text-3xl font-bold text-gray-900'>{selectedSize}</p>
 								</div>
 							</div>
 
 							<button
 								onClick={handleAddToCart}
 								disabled={addingToCart}
-								className='w-full rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-4 text-lg font-semibold text-white shadow-xl shadow-emerald-500/20 transition-all duration-200 hover:from-emerald-500 hover:to-emerald-400 hover:shadow-emerald-500/30 disabled:opacity-50 active:scale-[0.99] flex items-center justify-center gap-2'
+								className='w-full rounded-2xl bg-gradient-to-r from-pink-600 to-pink-500 px-6 py-4 text-lg font-semibold text-white shadow-xl shadow-pink-500/20 transition-all duration-200 hover:from-pink-500 hover:to-pink-400 hover:shadow-pink-500/30 disabled:opacity-50 active:scale-[0.99] flex items-center justify-center gap-2'
 							>
 								{addingToCart ? (
 									<div className='w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin' />

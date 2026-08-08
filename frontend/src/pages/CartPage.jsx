@@ -14,9 +14,9 @@ const CartPage = () => {
 		<div className='py-8 md:py-16'>
 			<div className='mx-auto max-w-screen-xl px-4 2xl:px-0'>
 				{cart.length > 0 && (
-					<h1 className='text-3xl font-bold text-white mb-8 font-display'>
+					<h1 className='text-3xl font-bold text-gray-900 mb-8 font-display'>
 						Shopping Cart
-						<span className='text-gray-500 text-lg font-normal ml-2'>({cart.length} items)</span>
+						<span className='text-gray-400 text-lg font-normal ml-2'>({cart.length} items)</span>
 					</h1>
 				)}
 				<div className='mt-6 sm:mt-8 md:gap-8 lg:flex lg:items-start xl:gap-10'>
@@ -63,15 +63,15 @@ const EmptyCartUI = () => (
 		animate={{ opacity: 1, y: 0 }}
 		transition={{ duration: 0.5 }}
 	>
-		<div className='rounded-full bg-gray-800/60 p-6 border border-gray-700/50'>
-			<ShoppingBag className='h-16 w-16 text-gray-500' />
+		<div className='rounded-full bg-pink-50 p-6 border border-pink-100'>
+			<ShoppingBag className='h-16 w-16 text-pink-300' />
 		</div>
 		<div className='text-center'>
-			<h3 className='text-2xl font-bold text-white mb-2 font-display'>Your cart is empty</h3>
-			<p className='text-gray-400 max-w-sm'>Looks like you haven't added anything to your cart yet. Browse our collection and find something you love.</p>
+			<h3 className='text-2xl font-bold text-gray-900 mb-2 font-display'>Your cart is empty</h3>
+			<p className='text-gray-500 max-w-sm'>Looks like you haven't added anything to your cart yet. Browse our collection and find something you love.</p>
 		</div>
 		<Link
-			className='inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-3 text-white font-semibold hover:from-emerald-500 hover:to-emerald-400 transition-all duration-200 shadow-lg shadow-emerald-500/20'
+			className='inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-pink-600 to-pink-500 px-6 py-3 text-white font-semibold hover:from-pink-500 hover:to-pink-400 transition-all duration-200 shadow-lg shadow-pink-500/20'
 			to='/'
 		>
 			Start Shopping

@@ -63,16 +63,16 @@ const CreateProductForm = () => {
 
 	return (
 		<motion.div
-			className='bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 shadow-xl shadow-emerald-500/5 rounded-2xl p-8 max-w-xl mx-auto'
+			className='bg-white border border-gray-200 shadow-xl shadow-pink-500/5 rounded-2xl p-8 max-w-xl mx-auto'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.8 }}
 		>
-			<h2 className='text-2xl font-bold text-white mb-6 font-display'>Create New Product</h2>
+			<h2 className='text-2xl font-bold text-gray-900 mb-6 font-display'>Create New Product</h2>
 
 			<form onSubmit={handleSubmit} className='space-y-5'>
 				<div>
-					<label htmlFor='name' className='block text-sm font-medium text-gray-300 mb-1.5'>
+					<label htmlFor='name' className='block text-sm font-medium text-gray-700 mb-1.5'>
 						Product Name
 					</label>
 					<input
@@ -81,14 +81,14 @@ const CreateProductForm = () => {
 						name='name'
 						value={newProduct.name}
 						onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-						className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-2.5 px-4 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+						className='block w-full rounded-xl border border-gray-300 bg-white py-2.5 px-4 text-gray-900 placeholder-gray-400 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors'
 						placeholder='Summer Dress'
 						required
 					/>
 				</div>
 
 				<div>
-					<label htmlFor='description' className='block text-sm font-medium text-gray-300 mb-1.5'>
+					<label htmlFor='description' className='block text-sm font-medium text-gray-700 mb-1.5'>
 						Description
 					</label>
 					<textarea
@@ -97,14 +97,14 @@ const CreateProductForm = () => {
 						value={newProduct.description}
 						onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
 						rows='3'
-						className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-2.5 px-4 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors resize-none'
+						className='block w-full rounded-xl border border-gray-300 bg-white py-2.5 px-4 text-gray-900 placeholder-gray-400 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors resize-none'
 						placeholder='A beautiful summer dress...'
 						required
 					/>
 				</div>
 
 				<div>
-					<label htmlFor='price' className='block text-sm font-medium text-gray-300 mb-1.5'>
+					<label htmlFor='price' className='block text-sm font-medium text-gray-700 mb-1.5'>
 						Price
 					</label>
 					<input
@@ -115,14 +115,14 @@ const CreateProductForm = () => {
 						onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
 						step='0.01'
 						min='0'
-						className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-2.5 px-4 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+						className='block w-full rounded-xl border border-gray-300 bg-white py-2.5 px-4 text-gray-900 placeholder-gray-400 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors'
 						placeholder='49.99'
 						required
 					/>
 				</div>
 
 					<div>
-					<label htmlFor='category' className='block text-sm font-medium text-gray-300 mb-1.5'>
+					<label htmlFor='category' className='block text-sm font-medium text-gray-700 mb-1.5'>
 						Collection
 					</label>
 					<select
@@ -130,7 +130,7 @@ const CreateProductForm = () => {
 						name='category'
 						value={newProduct.category}
 						onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
-						className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-2.5 px-4 text-white focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+						className='block w-full rounded-xl border border-gray-300 bg-white py-2.5 px-4 text-gray-900 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors'
 						required
 					>
 						<option value='dress'>Dress</option>
@@ -139,7 +139,7 @@ const CreateProductForm = () => {
 				</div>
 
 			<div className='space-y-1'>
-					<label className='block text-sm font-medium text-gray-300 mb-1.5'>
+					<label className='block text-sm font-medium text-gray-700 mb-1.5'>
 						Product Image
 					</label>
 					<div className='grid gap-4 md:grid-cols-2'>
@@ -151,7 +151,7 @@ const CreateProductForm = () => {
 								value={newProduct.imageUrl}
 								onChange={(e) => setNewProduct({ ...newProduct, imageUrl: e.target.value, image: "" })}
 								placeholder='https://example.com/image.jpg'
-								className='block w-full rounded-xl border border-gray-600 bg-gray-700/50 py-2.5 px-4 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none transition-colors'
+								className='block w-full rounded-xl border border-gray-300 bg-white py-2.5 px-4 text-gray-900 placeholder-gray-400 focus:border-pink-500 focus:ring-pink-500 focus:outline-none transition-colors'
 							/>
 						</div>
 						<div>
@@ -165,28 +165,28 @@ const CreateProductForm = () => {
 							/>
 							<label
 								htmlFor='image'
-								className='flex items-center justify-center gap-2 rounded-xl border border-dashed border-gray-600 bg-gray-700/30 py-2.5 px-4 text-sm font-medium text-gray-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-200 cursor-pointer'
+								className='flex items-center justify-center gap-2 rounded-xl border border-dashed border-gray-300 bg-gray-50 py-2.5 px-4 text-sm font-medium text-gray-600 hover:border-pink-500/50 hover:text-pink-600 transition-all duration-200 cursor-pointer'
 							>
 								<Upload className='h-4 w-4' />
 								Upload Image
 							</label>
 						</div>
 					</div>
-					<p className='text-xs text-gray-500 mt-1.5'>
+					<p className='text-xs text-gray-400 mt-1.5'>
 						Paste an image URL or upload a file (max 5MB).
 					</p>
 				</div>
 
 				{(newProduct.image || newProduct.imageUrl) && (
-					<div className='rounded-xl border border-gray-700/50 bg-gray-900/60 p-3'>
-						<p className='text-xs font-medium text-gray-400 mb-2 flex items-center gap-1.5'>
+					<div className='rounded-xl border border-gray-200 bg-gray-50 p-3'>
+						<p className='text-xs font-medium text-gray-500 mb-2 flex items-center gap-1.5'>
 							<ImageIcon size={14} />
 							Preview
 						</p>
 						<img
 							src={newProduct.imageUrl || newProduct.image}
 							alt='Product preview'
-							className='h-48 w-full rounded-lg object-contain border border-gray-700/50 bg-gray-950'
+							className='h-48 w-full rounded-lg object-contain border border-gray-200 bg-white'
 							loading='lazy'
 						/>
 					</div>
@@ -194,7 +194,7 @@ const CreateProductForm = () => {
 
 				<button
 					type='submit'
-					className='w-full rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 hover:from-emerald-500 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2'
+					className='w-full rounded-xl bg-gradient-to-r from-pink-600 to-pink-500 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-500/20 hover:from-pink-500 hover:to-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-white transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2'
 					disabled={loading}
 				>
 					{loading ? (
