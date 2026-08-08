@@ -1,6 +1,5 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
@@ -17,25 +16,29 @@ import { useCartStore } from "./stores/useCartStore";
 import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
 import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 
-const NotFoundPage = () => (
+const NotFoundPage = ({ title = "Page not found", message = "The page you're looking for doesn't exist or has been moved.", hideHomeLink = false }) => (
 	<div className="min-h-screen flex flex-col items-center justify-center px-4">
 		<h1 className="text-8xl font-black text-emerald-500 mb-4 font-display">404</h1>
-		<p className="text-2xl text-gray-300 mb-8 font-display">Page not found</p>
+		<p className="text-2xl text-gray-300 mb-8 font-display">{title}</p>
 		<p className="text-gray-400 mb-8 text-center max-w-md">
-			The page you're looking for doesn't exist or has been moved.
+			{message}
 		</p>
-		<a
-			href="/"
-			className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-white font-semibold hover:bg-emerald-500 transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25"
-		>
-			Back to Home
-		</a>
+		{!hideHomeLink && (
+			<a
+				href="/"
+				className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-white font-semibold hover:bg-emerald-500 transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25"
+			>
+				Back to Home
+			</a>
+		)}
 	</div>
 );
 
 function App() {
 	const { user, checkAuth, checkingAuth } = useUserStore();
 	const { getCartItems } = useCartStore();
+	const { pathname } = useLocation();
+	const isServerDown = pathname === "/";
 
 	useEffect(() => {
 		checkAuth();
@@ -59,9 +62,18 @@ function App() {
 			</div>
 
 			<div className='relative z-50 pt-20'>
-				<Navbar />
+				{!isServerDown && <Navbar />}
 				<Routes>
-					<Route path='/' element={<HomePage />} />
+					<Route
+						path='/'
+						element={
+							<NotFoundPage
+								title='Server is not responding'
+								message='Sorry, the server is currently unavailable. Please try again later.'
+								hideHomeLink
+							/>
+						}
+					/>
 					<Route path='/product/:id' element={<ProductPage />} />
 					<Route path='/category/:category' element={<CategoryPage />} />
 					<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
