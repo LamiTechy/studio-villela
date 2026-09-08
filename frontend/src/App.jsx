@@ -58,10 +58,10 @@ function App() {
 				</div>
 			</div>
 
-			<div className='relative z-50'>
-				{/* <Navbar /> */}
+			<div className='relative z-50 pt-20'>
+				<Navbar />
 				<Routes>
-					<Route path='/' element={<div className='min-h-screen bg-black' />} />
+					<Route path='/' element={<HomePage />} />
 					<Route path='/product/:id' element={<ProductPage />} />
 					<Route path='/category/:category' element={<CategoryPage />} />
 					<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
